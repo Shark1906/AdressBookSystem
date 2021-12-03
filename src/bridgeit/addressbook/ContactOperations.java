@@ -39,7 +39,11 @@ public class ContactOperations {
 		String phone = sc.nextLine();
 	
 		Contacts contacts = new Contacts(firstName, lastName, address, city, state, email, zip, phone);
+		if(isDuplicate(firstName, lastName) == false) {
 		contactDetails.contactList.add(contacts);
+		}else {
+			System.out.println("Contact already exists");
+		}
 		//getList();
 	}
 	
@@ -137,6 +141,16 @@ public class ContactOperations {
 			}
 			System.out.println("Contact Not found");
 			return null;
+	}
+	
+	public boolean isDuplicate(String firstName, String lastName) {
+		boolean isDuplicate = false;
+		for (int i = 0; i < contactDetails.contactList.size(); i++) {
+			if(contactDetails.contactList.get(i).firstName.equals(firstName)&&contactDetails.contactList.get(i).lastName.equals(lastName)) {
+				isDuplicate = true;
+			}
+		}
+		return isDuplicate;
 	}
 
 }
