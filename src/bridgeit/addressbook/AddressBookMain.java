@@ -8,7 +8,7 @@ public class AddressBookMain {
 	public static void main(String[] args) {
 		do {
 			Scanner sc = new Scanner(System.in);
-			System.out.println("What do you want to do:\n1. Add Contact\n2. View Contact\n3. Edit Contact\n4. Exit");
+			System.out.println("What do you want to do:\n1. Add Contact\n2. View Contact\n3. Edit Contact\n4. Delete Contact\n5. Exit");
 			input = sc.nextInt();
 		
 		
@@ -30,8 +30,14 @@ public class AddressBookMain {
 						contactOperations.editContact();
 						break;
 					}
+					
+					case 4: {
+						ContactOperations contactOperations = ContactOperations.getInstance();
+						contactOperations.removeContactByName();
+						break;
+					}
 				}
-			}while(input != 4);
+			}while(input != 5);
 	}
 
 }

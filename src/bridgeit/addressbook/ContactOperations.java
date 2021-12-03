@@ -47,9 +47,13 @@ public class ContactOperations {
 	}
 	
 	public void printAllContacts() {
-		for (int i = 0; i < contactDetails.contactList.size(); i++) {
-			System.out.println("Contact" + (i+1) + " " + contactDetails.contactList.get(i));		
+		if(contactDetails.contactList.size() != 0) {
+			for (int i = 0; i < contactDetails.contactList.size(); i++) {
+				System.out.println("Contact" + (i+1) + " " + contactDetails.contactList.get(i));		
 		
+			}
+		}else {
+			System.out.println("AddressBook is Empty");
 		}
 	}
 	
@@ -119,6 +123,19 @@ public class ContactOperations {
 			}
 		}
 		return null;
+	}
+	
+	public Contacts removeContactByName() {
+		System.out.println("Enter Firstname of Contact to delete");
+		String name = sc.nextLine();
+			for(Contacts contacts :contactDetails.contactList) {
+				if(contacts.firstName.equals(name)) {
+					contactDetails.contactList.remove(contacts);
+					return null;
+				}
+			}
+			System.out.println("Contact Not found");
+			return null;
 	}
 
 }
