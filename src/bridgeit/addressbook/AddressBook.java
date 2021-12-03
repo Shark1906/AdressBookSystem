@@ -2,37 +2,43 @@ package bridgeit.addressbook;
 
 import java.util.Scanner;
 
-public class AddressBookMain {
+public class AddressBook {
 	static int input;
+	private static AddressBook instance;
 	
-	public static void main(String[] args) {
+	private AddressBook() {}
+	
+	public static AddressBook getInstance() {
+		if(instance == null) {
+			instance = new AddressBook();
+		}
+		return instance;
+	}
+	
+	public void addressBookOperations() {
 		do {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("What do you want to do:\n1. Add Contact\n2. View Contact\n3. Edit Contact\n4. Delete Contact\n5. Exit");
 			input = sc.nextInt();
 		
-		
+			ContactOperations contactOperations = new ContactOperations();
 				switch (input) {
 					case 1: {
-						ContactOperations contactOperations = ContactOperations.getInstance();
 						contactOperations.addNewContact();
 						break;
 					}
 		
 					case 2: {
-						ContactOperations contactOperations = ContactOperations.getInstance();
 						contactOperations.printAllContacts();
 						break;
 					}
 					
 					case 3: {
-						ContactOperations contactOperations = ContactOperations.getInstance();
 						contactOperations.editContact();
 						break;
 					}
 					
 					case 4: {
-						ContactOperations contactOperations = ContactOperations.getInstance();
 						contactOperations.removeContactByName();
 						break;
 					}

@@ -1,10 +1,23 @@
 package bridgeit.addressbook;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ContactDetails {
-	List<Contacts> contactList = new  ArrayList<>();
+	private static ContactDetails instance;
 	
-
+	private ContactDetails() {}
+	
+	public static ContactDetails getInstance() {
+		if(instance == null) {
+			instance = new ContactDetails();
+		}
+		return instance;
+	}
+	
+	
+	
+	List<Contacts> contactList;
+	Map<String, List> addressBookMap = new HashMap<>();
 }

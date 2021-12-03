@@ -4,19 +4,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ContactOperations {
-	private static ContactOperations instance;
+	//private static ContactOperations instance;
 	Scanner sc = new Scanner(System.in);
 	
-	private ContactOperations() {}
+//	private ContactOperations() {}
+//	
+//	public static ContactOperations getInstance() {
+//		if(instance == null) {
+//			instance = new ContactOperations();
+//		}
+//		return instance;
+//	}
 	
-	public static ContactOperations getInstance() {
-		if(instance == null) {
-			instance = new ContactOperations();
-		}
-		return instance;
-	}
-	
-	ContactDetails contactDetails = new ContactDetails();
+	ContactDetails contactDetails = ContactDetails.getInstance();
 	
 	public void addNewContact() {
 		
@@ -40,9 +40,10 @@ public class ContactOperations {
 	
 		Contacts contacts = new Contacts(firstName, lastName, address, city, state, email, zip, phone);
 		contactDetails.contactList.add(contacts);
+		//getList();
 	}
 	
-	public List<Contacts> getList() {
+	public List getList() {
 		return contactDetails.contactList;
 	}
 	
