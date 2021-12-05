@@ -62,7 +62,8 @@ public class ContactOperations {
 		}
 	}
 	
-	public Contacts editContact() {
+	public void editContact() {
+		if(contactDetails.contactList.size() != 0) {
 		System.out.println("Enter first name of contact to Edit");
 		String name = sc.nextLine();
 		for(Contacts contacts :contactDetails.contactList) {
@@ -123,14 +124,19 @@ public class ContactOperations {
 
 				default:
 					break;
-				}
-			return null;	
+				}	
+			}else {
+				System.out.println("Contact not found");
 			}
 		}
-		return null;
+		}else {
+			System.out.println("Address Book is empty");
+		}
 	}
 	
 	public Contacts removeContactByName() {
+		ContactDetails contactDetails = ContactDetails.getInstance();
+		if(contactDetails.contactList.size() != 0) {
 		System.out.println("Enter Firstname of Contact to delete");
 		String name = sc.nextLine();
 			for(Contacts contacts :contactDetails.contactList) {
@@ -140,7 +146,10 @@ public class ContactOperations {
 				}
 			}
 			System.out.println("Contact Not found");
-			return null;
+		}else {
+			System.out.println("Address book is empty");
+		}
+		return null;
 	}
 	
 	public boolean isDuplicate(String firstName, String lastName) {
