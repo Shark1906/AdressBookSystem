@@ -15,7 +15,7 @@ public class MultipleAddressBook {
 		do {
 			Scanner sc = new Scanner(System.in);
 			System.out.println(
-					"What do you want to do:\n1. Create AddressBook\n2. View AddressBook\n3. Search AddressBook\n4. Exit");
+					"What do you want to do:\n1. Create AddressBook\n2. View AddressBook\n3. Search a AddressBook\n4. Search all AddressBook\n5. Exit");
 			input = sc.nextInt();
 			switch (input) {
 			case 1: {
@@ -36,7 +36,7 @@ public class MultipleAddressBook {
 				if (contactDetails.addressBookMap.isEmpty() == true) {
 					System.out.println("Address book is empty");
 				} else {
-					System.out.println(contactDetails.addressBookMap.keySet());
+					System.out.println("Address Books Name : " + contactDetails.addressBookMap.keySet());
 					Scanner sc2 = new Scanner(System.in);
 					System.out.println("Enter the Address Book Name you want to view");
 					String addressBookName = sc2.nextLine();
@@ -59,7 +59,7 @@ public class MultipleAddressBook {
 				if (contactDetails.addressBookMap.isEmpty() == true) {
 					System.out.println("Address book is empty");
 				} else {
-					System.out.println(contactDetails.addressBookMap.keySet());
+					System.out.println("Address Books Name : " + contactDetails.addressBookMap.keySet());
 					Scanner sc2 = new Scanner(System.in);
 					Scanner sc3 = new Scanner(System.in);
 					System.out.println("Enter the Address Book Name you want to search");
@@ -84,7 +84,35 @@ public class MultipleAddressBook {
 				}
 				break;
 			}
+			
+			case 4: {
+				if (contactDetails.addressBookMap.isEmpty() == true) {
+					System.out.println("Address book is empty");
+				} else {
+				Scanner sc4 = new Scanner(System.in);
+				System.out.println("Enter the city to get details of persons");
+				String city = sc4.nextLine();
+				List<Contacts> searchList = new ArrayList<>();
+				
+				for (String key: contactDetails.addressBookMap.keySet()) {
+				    List<Contacts> list = contactDetails.addressBookMap.get(key);
+				    for (int i = 0; i < list.size(); i++) {
+				    	if(list.get(i).city.equals(city) ) {
+				    		searchList.add(list.get(i));
+				    	}
+					}
+				}
+				if(searchList.size() > 0) {
+				for (int i = 0; i < searchList.size(); i++) {
+					System.out.println(searchList.get(i));
+				}
+				}else {
+					System.out.println("No persons in this city");
+				}
+				}
+				break;
 			}
-		} while (input != 4);
+			}
+		} while (input != 5);
 	}
 }
