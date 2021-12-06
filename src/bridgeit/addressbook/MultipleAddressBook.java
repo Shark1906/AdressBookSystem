@@ -9,7 +9,7 @@ public class MultipleAddressBook {
 	static int input;
 
 	public static void main(String[] args) {
-		ContactOperations contactOperations = new ContactOperations();
+		ContactOperations contactOperations = ContactOperations.getInstance();
 		AddressBook addressBook = AddressBook.getInstance();
 		ContactDetails contactDetails = ContactDetails.getInstance();
 		do {
