@@ -9,7 +9,7 @@ public class MultipleAddressBook {
 	static int input;
 
 	public static void main(String[] args) {
-		ContactOperations contactOperations = new ContactOperations();
+		ContactOperations contactOperations = ContactOperations.getInstance();
 		AddressBook addressBook = AddressBook.getInstance();
 		ContactDetails contactDetails = ContactDetails.getInstance();
 		do {
@@ -102,9 +102,11 @@ public class MultipleAddressBook {
 				    	}
 					}
 				}
+				
 				if(searchList.size() > 0) {
+					System.out.println("Number of Person in " + city + " : " + searchList.size());
 				for (int i = 0; i < searchList.size(); i++) {
-					System.out.println(searchList.get(i));
+					System.out.println((i+1)+". "+searchList.get(i));
 				}
 				}else {
 					System.out.println("No persons in this city");

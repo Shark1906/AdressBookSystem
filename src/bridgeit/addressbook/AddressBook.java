@@ -21,7 +21,7 @@ public class AddressBook {
 			System.out.println("What do you want to do:\n1. Add Contact\n2. View Contact\n3. Edit Contact\n4. Delete Contact\n5. Exit");
 			input = sc.nextInt();
 		
-			ContactOperations contactOperations = new ContactOperations();
+			ContactOperations contactOperations = ContactOperations.getInstance();
 				switch (input) {
 					case 1: {
 						contactOperations.addNewContact();
