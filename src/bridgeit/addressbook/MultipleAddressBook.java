@@ -102,9 +102,11 @@ public class MultipleAddressBook {
 				    	}
 					}
 				}
+				
 				if(searchList.size() > 0) {
+					System.out.println("Number of Person in " + city + " : " + searchList.size());
 				for (int i = 0; i < searchList.size(); i++) {
-					System.out.println(searchList.get(i));
+					System.out.println((i+1)+". "+searchList.get(i));
 				}
 				}else {
 					System.out.println("No persons in this city");
