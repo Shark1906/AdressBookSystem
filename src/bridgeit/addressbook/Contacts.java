@@ -27,6 +27,10 @@ public class Contacts {
 		public String getFirstName() {
 			return firstName;
 		}
+		
+		public String getCity() {
+			return city;
+		}
 
 		@Override
 		public String toString() {
