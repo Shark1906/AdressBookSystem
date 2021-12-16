@@ -1,8 +1,10 @@
 package bridgeit.addressbook;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class MultipleAddressBook {
 
@@ -15,7 +17,7 @@ public class MultipleAddressBook {
 		do {
 			Scanner sc = new Scanner(System.in);
 			System.out.println(
-					"What do you want to do:\n1. Create AddressBook\n2. View AddressBook\n3. Search a AddressBook\n4. Search all AddressBook\n5. Exit");
+					"What do you want to do:\n1. Create AddressBook\n2. View AddressBook\n3. Search a AddressBook\n4. Search all AddressBook\n5. Sort AddressBook by Contact name\n6. Exit");
 			input = sc.nextInt();
 			switch (input) {
 			case 1: {
@@ -114,7 +116,33 @@ public class MultipleAddressBook {
 				}
 				break;
 			}
+			
+			case 5: {
+				if (contactDetails.addressBookMap.isEmpty() == true) {
+					System.out.println("Address book is empty");
+				} else {
+					System.out.println("Address Books Name : " + contactDetails.addressBookMap.keySet());
+					Scanner sc2 = new Scanner(System.in);
+					Scanner sc3 = new Scanner(System.in);
+					System.out.println("Enter the Address Book Name you want to sort");
+					String addressBookName = sc2.nextLine();
+					if (contactDetails.addressBookMap.get(addressBookName) == null) {
+						System.out.println("Address Book Not found with this name");
+					} else {
+						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
+							List<Contacts> list = contactDetails.addressBookMap.get(addressBookName);
+							List<Contacts> sortedList = list.stream()
+															.sorted(Comparator.comparing(Contacts::getFirstName))
+															.collect(Collectors.toList());
+							sortedList.forEach(System.out::println);
+						} else {
+							System.out.println("Address Book is empty");
+						}
+					}
+				}
+				break;
 			}
-		} while (input != 5);
+			}
+		} while (input != 6);
 	}
 }

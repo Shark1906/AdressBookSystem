@@ -24,6 +24,10 @@ public class Contacts {
 			this.phone = phone;
 		}
 		
+		public String getFirstName() {
+			return firstName;
+		}
+
 		@Override
 		public String toString() {
 			return "[FirstName=" + firstName + ", LastName=" + lastName + ", Address=" + address + ", City="
