@@ -1,5 +1,6 @@
 package bridgeit.addressbook;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -10,14 +11,14 @@ public class MultipleAddressBook {
 
 	static int input;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		ContactOperations contactOperations = ContactOperations.getInstance();
 		AddressBook addressBook = AddressBook.getInstance();
 		ContactDetails contactDetails = ContactDetails.getInstance();
 		do {
 			Scanner sc = new Scanner(System.in);
 			System.out.println(
-					"What do you want to do:\n1. Create AddressBook\n2. View AddressBook\n3. Search a AddressBook\n4. Search all AddressBook\n5. Sort AddressBook by Contact Name\n6. Sort AddressBook by Contact City\n7. Exit");
+					"What do you want to do:\n1. Create AddressBook\n2. View AddressBook\n3. Search a AddressBook\n4. Search all AddressBook\n5. Sort AddressBook by Contact Name\n6. Sort AddressBook by Contact City\n7. Write AddressBook\n8. Read AddressBook\n9. Exit");
 			input = sc.nextInt();
 			switch (input) {
 			case 1: {
@@ -132,8 +133,8 @@ public class MultipleAddressBook {
 						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
 							List<Contacts> list = contactDetails.addressBookMap.get(addressBookName);
 							List<Contacts> sortedList = list.stream()
-															.sorted(Comparator.comparing(Contacts::getFirstName))
-															.collect(Collectors.toList());
+							.sorted(Comparator.comparing(Contacts::getFirstName))
+							.collect(Collectors.toList());
 							sortedList.forEach(System.out::println);
 						} else {
 							System.out.println("Address Book is empty");
@@ -142,6 +143,7 @@ public class MultipleAddressBook {
 				}
 				break;
 			}
+			
 			case 6: {
 				if (contactDetails.addressBookMap.isEmpty() == true) {
 					System.out.println("Address book is empty");
@@ -157,8 +159,9 @@ public class MultipleAddressBook {
 						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
 							List<Contacts> list = contactDetails.addressBookMap.get(addressBookName);
 							List<Contacts> sortedList = list.stream()
-															.sorted(Comparator.comparing(Contacts::getCity))
-															.collect(Collectors.toList());
+							.sorted(Comparator.comparing(Contacts::getCity))
+							.collect(Collectors.toList());
+							
 							sortedList.forEach(System.out::println);
 						} else {
 							System.out.println("Address Book is empty");
@@ -167,7 +170,52 @@ public class MultipleAddressBook {
 				}
 				break;
 			}
+			
+			case 7: {
+				if (contactDetails.addressBookMap.isEmpty() == true) {
+					System.out.println("Address book is empty");
+				} else {
+					System.out.println("Address Books Name : " + contactDetails.addressBookMap.keySet());
+					Scanner sc2 = new Scanner(System.in);
+					Scanner sc3 = new Scanner(System.in);
+					System.out.println("Enter the Address Book Name you want to write");
+					String addressBookName = sc2.nextLine();
+					if (contactDetails.addressBookMap.get(addressBookName) == null) {
+						System.out.println("Address Book Not found with this name");
+					} else {
+						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
+							List<Contacts> list = contactDetails.addressBookMap.get(addressBookName);
+							AddressBookIO.writeAddressBook(list, addressBookName);
+						} else {
+							System.out.println("Address Book is empty");
+						}
+					}
+				}
+				break;
 			}
-		} while (input != 7);
+			
+			case 8: {
+				if (contactDetails.addressBookMap.isEmpty() == true) {
+					System.out.println("Address book is empty");
+				} else {
+					System.out.println("Address Books Name : " + contactDetails.addressBookMap.keySet());
+					Scanner sc2 = new Scanner(System.in);
+					Scanner sc3 = new Scanner(System.in);
+					System.out.println("Enter the Address Book Name you want to read");
+					String addressBookName = sc2.nextLine();
+					if (contactDetails.addressBookMap.get(addressBookName) == null) {
+						System.out.println("Address Book Not found with this name");
+					} else {
+						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
+							AddressBookIO.readAddressBook(addressBookName);
+						} else {
+							System.out.println("Address Book is empty");
+						}
+					}
+				}
+				break;
+			}
+			}
+		} while (input != 9);
 	}
 }
