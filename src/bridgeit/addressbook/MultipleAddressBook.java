@@ -18,7 +18,7 @@ public class MultipleAddressBook {
 		do {
 			Scanner sc = new Scanner(System.in);
 			System.out.println(
-					"What do you want to do:\n1. Create AddressBook\n2. View AddressBook\n3. Search a AddressBook\n4. Search all AddressBook\n5. Sort AddressBook by Contact Name\n6. Sort AddressBook by Contact City\n7. Write AddressBook\n8. Read AddressBook\n9. Exit");
+					"What do you want to do:\n1. Create AddressBook\n2. View AddressBook\n3. Search a AddressBook\n4. Search all AddressBook\n5. Sort AddressBook by Contact Name\n6. Sort AddressBook by Contact City\n7. Write AddressBook\n8. Read AddressBook\n9. Create AddressBook CSV File\n10. Read AddressBook CSV File\n11. Exit");
 			input = sc.nextInt();
 			switch (input) {
 			case 1: {
@@ -185,7 +185,7 @@ public class MultipleAddressBook {
 					} else {
 						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
 							List<Contacts> list = contactDetails.addressBookMap.get(addressBookName);
-							AddressBookIO.writeAddressBook(list, addressBookName);
+							new AddressBookFileIO().writeAddressBook(list, addressBookName);
 						} else {
 							System.out.println("Address Book is empty");
 						}
@@ -207,7 +207,53 @@ public class MultipleAddressBook {
 						System.out.println("Address Book Not found with this name");
 					} else {
 						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
-							AddressBookIO.readAddressBook(addressBookName);
+							new AddressBookFileIO().readAddressBook(addressBookName);
+						} else {
+							System.out.println("Address Book is empty");
+						}
+					}
+				}
+				break;
+			}
+			
+			case 9: {
+				if (contactDetails.addressBookMap.isEmpty() == true) {
+					System.out.println("Address book is empty");
+				} else {
+					System.out.println("Address Books Name : " + contactDetails.addressBookMap.keySet());
+					Scanner sc2 = new Scanner(System.in);
+					Scanner sc3 = new Scanner(System.in);
+					System.out.println("Enter the Address Book Name you want to create CSV File");
+					String addressBookName = sc2.nextLine();
+					if (contactDetails.addressBookMap.get(addressBookName) == null) {
+						System.out.println("Address Book Not found with this name");
+					} else {
+						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
+							List<Contacts> list = contactDetails.addressBookMap.get(addressBookName);
+							new AddressBookCsvIO().writeAddressBook(list, addressBookName);
+						} else {
+							System.out.println("Address Book is empty");
+						}
+					}
+				}
+				break;
+			}
+			
+			case 10: {
+				if (contactDetails.addressBookMap.isEmpty() == true) {
+					System.out.println("Address book is empty");
+				} else {
+					System.out.println("Address Books Name : " + contactDetails.addressBookMap.keySet());
+					Scanner sc2 = new Scanner(System.in);
+					Scanner sc3 = new Scanner(System.in);
+					System.out.println("Enter the Address Book Name you want to view CSV File");
+					String addressBookName = sc2.nextLine();
+					if (contactDetails.addressBookMap.get(addressBookName) == null) {
+						System.out.println("Address Book Not found with this name");
+					} else {
+						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
+							List<Contacts> list = contactDetails.addressBookMap.get(addressBookName);
+							new AddressBookCsvIO().readAddressBook(addressBookName);
 						} else {
 							System.out.println("Address Book is empty");
 						}
@@ -216,6 +262,6 @@ public class MultipleAddressBook {
 				break;
 			}
 			}
-		} while (input != 9);
+		} while (input != 11);
 	}
 }
