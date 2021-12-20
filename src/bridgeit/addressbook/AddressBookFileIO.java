@@ -11,11 +11,14 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
-public class AddressBookIO {
+public class AddressBookFileIO implements BookIO {
+	
+	public AddressBookFileIO() { }
 	
 	private static final String Location = "D:\\project\\training\\bridgelabz_rpf\\AdressBookSystem\\src";
-
-	public static void writeAddressBook(List<Contacts> contactList, String bookName) throws IOException {
+	
+	@Override
+	public void writeAddressBook(List<Contacts> contactList, String bookName) throws IOException {
 		try {
 		String url = Location+"\\" + bookName;
 		Path bookPath = Paths.get(url);
@@ -40,7 +43,8 @@ public class AddressBookIO {
 		
 	}
 	
-	public static void readAddressBook(String name) {
+	@Override
+	public void readAddressBook(String name) {
 		try {
 		File file = new File(Location + "\\" +name+ "\\" +name+ ".txt");
 		Scanner sc = new Scanner(file);
