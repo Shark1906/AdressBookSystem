@@ -230,7 +230,7 @@ public class MultipleAddressBook {
 					} else {
 						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
 							List<Contacts> list = contactDetails.addressBookMap.get(addressBookName);
-							new OpenCSVFileIO().writeAddressBook(list, addressBookName);
+							new AddressBookJson().writeAddressBook(list, addressBookName);
 						} else {
 							System.out.println("Address Book is empty");
 						}
@@ -252,7 +252,7 @@ public class MultipleAddressBook {
 						System.out.println("Address Book Not found with this name");
 					} else {
 						if (contactDetails.addressBookMap.get(addressBookName).size() > 0) {
-							new OpenCSVFileIO().readAddressBook(addressBookName);
+							new AddressBookJson().readAddressBook(addressBookName);
 						} else {
 							System.out.println("Address Book is empty");
 						}

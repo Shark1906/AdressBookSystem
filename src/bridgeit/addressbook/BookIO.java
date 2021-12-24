@@ -8,5 +8,5 @@ import com.opencsv.exceptions.CsvValidationException;
 public interface BookIO {
 	void writeAddressBook(List<Contacts> contactList, String bookName) throws IOException;
 
-	void readAddressBook(String name) throws IOException, ClassNotFoundException, CsvValidationException;
+	void readAddressBook(String name) throws IOException, ClassNotFoundException;
 }
